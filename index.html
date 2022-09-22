@@ -1,100 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Fabian 2009</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <title>Formulario 1 Fabian</title>
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
-    <header>
-        <h1>The code review</h1>
-    </header>
+<header>
+ <h1>Revisión del código</h1> 
+</header>
 
-    <div class="top">
-        <h2> Suscribete a nuestro boletín de noticias</h2>
-        <p>Recibe las últimas novedades sobre la evolución de su código en su bandeja de entrada</p>
-    </div>
+ <div class="top">
 
-    <div class="wrapper">
-        <hr class="thick">
-        <hr>
-        <form action="" method="post" accept-charset="ISO-8859-1">
-            <fieldset class=" contact">
-                <legend>información de contacto</legend>
-                <div class="contact_input">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="id_nombre" name="nombre" required placeholder="required">
-                </div>
-                <div class="contact_input"></div> 
-                    <label for="email">E-mail</label>
-                    <input type="email" id="id_email" name="email" required placeholder="requerid">
-                </div>
-                <div class="contact_input">
-                    <label for="teléfono">teléfono</label>
-                        <input type="tel"  id="id_telefono" name="telefono">
-                </div>
-                <div class="contact_input">
-                    <label for="direccion">Dirección</label>
-                    <input type="text"  id="id_calle" name="direccion">
-                </div>
-                <div class="contact_input">
-                    <label for="ciudad">Ciudad</label>
-                    <input type="text"  id="id_ciudad" aria-describedby="ciudad" >
-                </div>
-                <div class="contact_input">
-                    <label for="estado" >Estado</label> 
-                    <select id="id_estado" name="estado">
-                        <option value="0" selected disabled hidden>Choose your option</option>
-                        <option value="Andalucí­a">Andalucí­a</option>
-                        <option value="Aragón">Aragón</option>
-                        <option value="Principado de Asturias">Principado de Asturias</option>
-                        <option value="Islas Baleares">Islas Baleares</option>
-                        <option value="País Vasco">Paí­s Vasco</option>
-                        <option value="Islas Canarias">Islas Canarias</option>
-                        <option value="Cantabria">Cantabria</option>
-                        <option value="Castilla-La Mancha">Castilla-La Mancha</option>
-                        <option value="Castilla y León">Castilla y León</option>
-                        <option value="Cataluña">Cataluña</option>
-                        <option value="Extremadura">Extremadura</option>
-                        <option value="Galicia">Galicia</option>
-                        <option value="Comunidad de Madrid">Comunidad de Madrid</option>
-                        <option value="Región de Murcia">Región de Murcia</option>
-                        <option value="Comunidad Foral de Navarra">Comunidad Foral de Navarra</option>
-                        <option value="La Rioja">La Rioja</option>
-                        <option value="Comunidad Valenciana">Comunidad Valenciana</option>
-                        <option value="Ceuta">Ceuta</option>
-                        <option value="Melilla">Melilla</option>
-                    </select>
-                </div>
-                <div class="contact_input">
-                <label for="CP" ">Codigo postal</label>
-                    <input type="text"  id="id_cp" namey="CP" >
-                </div>
-            </fieldset>
-            <hr>
-            <fieldset class="news radio checkbox">
-                <h2>Noticias</h2>
-                <p>Seleccione el boletín que desea recibir</p>
-                    <label><input type="checkbox" id="id_check" name="Boletin">HTML news</label>
-                    <label><input type="checkbox" id="id_check" name="Boletin">CSS news</label>
-                    <label><input type="checkbox" id="id_check" name="Boletin">Javascript news</label>
-                <p>Formato del boletín</p>
-                    <label><input type="radio" id="id_forma" name="formato"> HTML</label>
-                    <label><input type="radio" id="id_forma" name="formato"> Plain text</label>
-                <p>Otros temas de los que te gustaría tener información</p>
-                <textarea id="id_temas" name="temas" cols="30" rows="10"></textarea>
-            </fieldset>
-                <button type="submit" >Inscribirse</button>
-                <button type="reset">Reiniciar</button>
-        </form>
+   <h2>Suscríbase a nuestro boletín de noticias</h2>
+   <p>Reciba las últimas noticias sobre la evolución de su código en su bandeja de entrada</p>
+
+  </div>
+  
+      <form action="" method="post" accept-charset="ISO-8859-1">
+  
+          <fieldset class="contact">
+            <legend>Información de contacto</legend>
+  
+          <div class="contact_input">
+            <label for="nombre">Nombre completo</label>
+            <input type="text"  id="nombre" name="nombre" aria-describedby="nombre" placeholder="requerido" required><br>
+          </div>
+      
+          <div class="contact_input">
+                  <label for="email">E-mail</label>
+                  <input type="email" name="email" class="form-control" id="e-mail" aria-describedby="e-mail" placeholder="requerido" required><br>
+          </div> 
+
+          <div class="contact_input">
+              <label for="telefono">Numero de telefono</label>
+              <input type="tel"  id="telefono" name="telefono" aria-describedby="telefono" ><br>
+          </div>
+
+          <div class="contact_input">
+              <label for="direccion">Dirección</label>
+              <input type="text"  id="direccion" name="direccion" aria-describedby="direccion" ><br>
+          </div>
+
+          <div class="contact_input">
+              <label for="ciudad">Ciudad</label>
+              <input type="text"  id="ciudad" name="ciudad" aria-describedby="ciudad"><br>
+          </div>
+          
+          <div class="contact_input">
+
+              <label for="provincia">Provincia</label> 
+              <select name="provincia" id="provincia" >
+                <option value="0" selected disabled hidden>Choose your option</option>
+                <option value="Andalucí­a">Andalucí­a</option>
+                <option value="Aragón">Aragón</option>
+                <option value="Principado de Asturias">Principado de Asturias</option>
+                <option value="Islas Baleares">Islas Baleares</option>
+                <option value="País Vasco">Paí­s Vasco</option>
+                <option value="Islas Canarias">Islas Canarias</option>
+                <option value="Cantabria">Cantabria</option>
+                <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+                <option value="Castilla y León">Castilla y León</option>
+                <option value="Cataluña">Cataluña</option>
+                <option value="Extremadura">Extremadura</option>
+                <option value="Galicia">Galicia</option>
+                <option value="Comunidad de Madrid">Comunidad de Madrid</option>
+                <option value="Región de Murcia">Región de Murcia</option>
+                <option value="Comunidad Foral de Navarra">Comunidad Foral de Navarra</option>
+                <option value="La Rioja">La Rioja</option>
+                <option value="Comunidad Valenciana">Comunidad Valenciana</option>
+                <option value="Ceuta">Ceuta</option>
+                <option value="Melilla">Melilla</option>
+              </select><br>
+
+          </div>
+
+          <div class="contact_input">
+              <label id="label_zipCode" for="zipCode">Codigo zip</label><br>
+              <input type="text"  id="zipCode" name="zip" aria-describedby="zip"><br>
+            </div>
+          </fieldset>
+  
+          <hr>
+
+          <legend>Boletín de noticias</legend>
+          
+              <label>Seleccione los boletines que desea recibir</label><br>
+            <br>
+          <input type="checkbox" name="HMTL News" id="cbox1">
+          <label for="HTML News">HTML News</label><br>
+
+          <input type="checkbox" name="CSS News" id="cbox2">
+          <label for="CSS News">CSS News</label><br>
+
+          <input type="checkbox" name="Javascript News" id="cbox3">
+          <label for="Javascript News">Javascript News</label><br>
+          
+          <div>
+              <p>Formato del boletín de noticias</p>
+          <input type="radio" name="HTML" id="radio1">
+          <label for="HTML">HTML</label><br>
+
+          <input type="radio" name="Plain Text" id="radio2">
+          <label for="Plain text">Plain text</label>
         
-    </div>
-        <footer>
-            <p>Copyright The Code Reviw</p>
-        </footer>
-</body>
-</html>
+          </div>
+  
+          <div>
+            
+  <p>Otros temas que le gustaría conocer</p>
+  <textarea placeholder="" cols="40" rows="5" id="otrostemas" name="otrostemas"></textarea>
+  
+          </div>
+  
+        <button type="submit">Inscribirse</button>  
+      </form>
+
+ <footer> 
+      <p>Derechos de autor de la revisión del código</p>
+
+  </footer>
+  
+  </body>
+  </html>
