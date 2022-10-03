@@ -2,13 +2,37 @@
 require "../require/config.php"; //Conexión con el fichero config.
 //Definir las variables, El name que le tengo en el formulario (index.html)
 $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check = $formato = $otrostemas = "";
+$nombre_err = $email_err = $telefono_err = false;
+    
+    //con esta función limpiaremos los datos antes de validarlos y enviarlos
     function limpiar_dato($dato){
         $dato = trim($dato);    //trim sirve para eliminar espacios en blancos del inicio y del final
         $dato = stripcslashes($dato);   // Devuelve una cadena con las barras invertidas eliminadas
         $dato = htmlspecialchars($dato); //Para limpiar caracteres especiales: puntos, almohadillas, etc...
         return $dato; //Devuelve el dato añadido en el formulario
     }
-//nombre, email y telefono
+
+                //validar que el nombre esté bien escrito
+    if(validar_nombre($nombre)){
+        echo "<script> console.log ('el nombre es válido')</script>";
+    }else{
+        $nombre_err = true;
+    }; //Fin de validar_nombre
+    
+    //validar que el email esté bien escrito
+    if(validar_email($email)){
+        echo "<script> console.log ('el email es válido')</script>";
+    }else{
+        $email_err = true;
+    }; 
+    
+    //validar que el teléfono esté bien escrito
+    if(validar_telefono($telefono)){
+        echo "<script> console.log ('el teléfono es válido')</script>";
+    }else{
+        $telefono_err = true;
+    };
+
         /**
          * la  siguiente función va a validar el nombre
          * @param $nombre
@@ -23,11 +47,12 @@ $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check
         }
     }//termina la función del nombre validado
 
-        /**
-         * la función siguiente va a validar el email
-         * @param $email
-         * @return Boolean 
-         */
+
+    /**
+     * la función siguiente va a validar el email
+     * @param $email
+     * @return Boolean 
+     */
     function validar_email($email){
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))/*Valida una dirección de correo electrónico */ {
             return false;
@@ -35,12 +60,14 @@ $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check
             return true;
         }
     }
+
+    
     //Para documentar la función
-        /**<br>
-         * la función siguiente va a validar un teléfono
-         * @param $telefono
-         * @return Boolean 
-         */
+    /**
+     * la función siguiente va a validar un teléfono
+     * @param $telefono
+     * @return Boolean 
+     */
     function validar_telefono($telefono){
         if(!preg_match('/^[0-9]{9}+$/', $telefono)){
             return false;
@@ -48,23 +75,41 @@ $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check
             return true;
         }
     }
-
-echo "<br>";
+                        /*Después de limpiar las variables 
+                                    hay validarlas*/
+    
+    echo "<br>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print_r($_POST); //devuelve el post de forma legible 
     echo "<br><strong>Método post enviado</strong><br>";
 
-    if(!empty($_POST["nombre"]) || !empty($_POST["email"]) || !empty($_POST["telefono"])){
-        echo "<br><strong>datos post enviados</strong><br>";
-        //Asignar las variables (del formulario)
-        $nombre = limpiar_dato($_POST["nombre"]);
-        echo "<strong> Nombre:</strong>" . $nombre . "<br>";
-        $email = limpiar_dato($_POST["email"]);
-        echo "<strong> Correo:</strong>" . $email . "<br>";
-        $telefono = limpiar_dato($_POST["telefono"]);
-        echo "<strong> Teléfono:</strong>" . $telefono . "<br>";
+        if(!empty($_POST["nombre"]) || !empty($_POST["email"]) || !empty($_POST["telefono"])){
+            echo "<br><strong>datos post enviados</strong><br>";
+            //Asignar las variables (del formulario)
+            $nombre = limpiar_dato($_POST["nombre"]);
+            echo "<strong> Nombre:</strong>" . $nombre . "<br>";
+            $email = limpiar_dato($_POST["email"]);
+            echo "<strong> Correo:</strong>" . $email . "<br>";
+            $telefono = limpiar_dato($_POST["telefono"]);
+            echo "<strong> Teléfono:</strong>" . $telefono . "<br>";
 
-        /*Empezamos a usar los ISSET ya que tenemos warning */
+        if (validar_nombre($nombre) || validar_email($email) || validar_telefono($telefono)){
+            
+        }else{
+            if ($name_err==true){
+                echo "La validación del nombre realizada no es correcta";
+            }elseif($email_err==true){
+                echo "La validación del email realizada no es correcta";
+            }elseif($telefono_err==true){
+                echo "La validación del teléfono realizada no es correcta";
+            }
+        }
+
+
+
+                /*Empezamos a usar los ISSET ya que tenemos warning */
+
+
         //$dirección
         if (isset($_POST["direccion"])){
             $direccion = limpiar_dato($_POST["direccion"]);
@@ -119,31 +164,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $otrostemas = NULL;
             echo "<br> otrostemas vacío<br>";
         };
-
-        //validar que el nombre esté bien escrito
-        if(validar_nombre($nombre)){
-            echo "<br>Nombre Válido<br>";
-        }else{
-            echo "<br>El nombre NO está validado<br>";
-        }; //Fin de validar_nombre
-
-        //validar que el email esté bien escrito
-        if(validar_email($email)){
-            echo "<br>email Válido<br>";
-        }else{
-            echo "<br>El email NO está validado<br>";
-        }; 
-
-        //validar que el teléfono esté bien escrito
-        if(validar_telefono($telefono)){
-            echo "<br>teléfono Válido<br>";
-        }else{
-            echo "<br>El teléfono NO está validado<br>";
-        }; 
     }
 }
 
-        
+
 ?>   
 
 
