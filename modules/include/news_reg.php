@@ -5,41 +5,41 @@ $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check
 $nombre_err = $email_err = $telefono_err = false;
     
     //con esta función limpiaremos los datos antes de validarlos y enviarlos
-    function limpiar_dato($dato){
-        $dato = trim($dato); //trim sirve para eliminar espacios en blancos del inicio y del final
-        $dato = stripslashes($dato); // Devuelve una cadena con las barras invertidas o comillas eliminadas.
-        $dato = htmlspecialchars($dato); // Devuelve una cadena con las barras invertidas eliminadas
-        return $dato; //Devuelve el dato añadido en el formulario
-    }
+function limpiar_dato($dato){
+    $dato = trim($dato); //trim sirve para eliminar espacios en blancos del inicio y del final
+    $dato = stripslashes($dato); // Devuelve una cadena con las barras invertidas o comillas eliminadas.
+    $dato = htmlspecialchars($dato); // Devuelve una cadena con las barras invertidas eliminadas
+    return $dato; //Devuelve el dato añadido en el formulario
+}
 
         /**
          * la  siguiente función va a validar el nombre
          * @param $nombre
          * @return Boolean 
          */
-    function validar_nombre($nombre){
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$nombre)) /*si no se cumple la expresión regular...*/ {
-            return false; //devuelve falso
-            }else{
-                return true; //devuelve verdadero
-            }
-        }
+function validar_nombre($nombre){
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$nombre)) /*si no se cumple la expresión regular...*/ {
+        return false; //devuelve falso
+    }else{
+        return true; //devuelve verdadero
+    }
+}
 
-    function validar_telefono($telefono){
-            if(!preg_match('/^[0-9]{9}+$/', $telefono)){
-                return false;
-            }else{
-                return true;
-            }
-        }
+function validar_telefono($telefono){
+    if(!preg_match('/^[0-9]{9}+$/', $telefono)){
+        return false;
+    }else{
+        return true;
+    }
+}
 
-    function validar_email($email){
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return false;
-                }else{
-                    return true;
-                }
-            }
+function validar_email($email){
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }else{
+        return true;
+    }
+}
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
@@ -55,19 +55,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
         echo "<strong>Telefono: </strong>" . $telefono . "<br>";
 
         if(validar_nombre($nombre)){
-            echo"El nombre está validado";
+            echo"<br>El nombre está validado<br>";
         }else{
             $nombre_err = true; //si el nombre es erróneo, lo pasa a verdadero
         }
 
         if(validar_email($email)){
-            echo"El email está validado";
+            echo"<br>El email está validado<br>";
         }else{
             $email_err = true;  //si el email es erróneo, lo pasa a verdadero
         }
         
         if(validar_telefono($telefono)){
-            echo"El teléfono está validado";
+            echo"<br>El teléfono está validado<br>";
         }else{
             $telefono_err = true;   //si el teléfono es erróneo, lo pasa a verdadero
         }
