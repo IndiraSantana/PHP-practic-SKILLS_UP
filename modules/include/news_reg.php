@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             $telefono_err = true;   //si el teléfono es erróneo, lo pasa a verdadero
         }
 
-        if( validar_nombre($nombre) || validar_email($email) || validar_telefono($telefono) ){//abrir el if de validar 
+        if( validar_nombre($nombre) && validar_email($email) && validar_telefono($telefono)){//abrir el if de validar 
 
             /*Usamos los ISSET para quitar los warning */
             if(isset($_POST["direccion"])){
@@ -90,40 +90,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             if(isset($_POST["provincia"])){
                 $provincia =limpiar_dato($_POST["provincia"]);
             }else{
-            $provincia = NULL;
+                $provincia = NULL;
             }
 
-        if(isset($_POST["zip"])){
-            $zip =limpiar_dato($_POST["zip"]);
-        }else{
-            $zip = NULL;
-        }
+            if(isset($_POST["zip"])){
+                $zip =limpiar_dato($_POST["zip"]);
+            }else{
+                $zip = NULL;
+            }
 
-        if(isset($_POST["check"])){
-            $check =limpiar_dato($_POST["check"]);
-        }else{
-            $check = NULL;
-        }
+            if(isset($_POST["check"])){
+                $check =limpiar_dato($_POST["check"]);
+            }else{
+                $check = NULL;
+            }
         
-        if(isset($_POST["noticia"])){
-            $noticia =limpiar_dato($_POST["noticia"]);
-        }else{
-            $noticia = NULL;
-        }
+            if(isset($_POST["noticia"])){
+                $noticia =limpiar_dato($_POST["noticia"]);
+            }else{
+                $noticia = NULL;
+            }
         
-        if(isset($_POST["otrostemas"])){
-            $otrostemas =limpiar_dato($_POST["otrostemas"]);
-        }else{
-            $otrostemas = NULL;
-        }
+            if(isset($_POST["otrostemas"])){
+                $otrostemas =limpiar_dato($_POST["otrostemas"]);
+            }else{
+                $otrostemas = NULL;
+            }
         
-        $direccion= limpiar_dato($_POST["direccion"]);
-        $ciudad= limpiar_dato($_POST["ciudad"]);
-        $provincia= limpiar_dato($_POST["provincia"]);
-        $zip= limpiar_dato($_POST["zip"]);
-        $check= limpiar_dato($_POST["check"]);
-        $noticia= limpiar_dato($_POST["noticia"]);
-        $otrostemas= limpiar_dato($_POST["otrostemas"]);
+            $direccion= limpiar_dato($_POST["direccion"]);
+            $ciudad= limpiar_dato($_POST["ciudad"]);
+            $provincia= limpiar_dato($_POST["provincia"]);
+            $zip= limpiar_dato($_POST["zip"]);
+            $check= limpiar_dato($_POST["check"]);
+            $noticia= limpiar_dato($_POST["noticia"]);
+            $otrostemas= limpiar_dato($_POST["otrostemas"]);
 
         }else{                          /*cerrar el if de validar */
             if ($nombre_err == true){
@@ -146,11 +146,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
 
 
 ?>   
-
-
-
-
-
-
-
-
