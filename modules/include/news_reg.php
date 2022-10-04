@@ -44,7 +44,7 @@ function validar_email($email){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
     print_r ($_POST);
-    if(!empty($_POST["nombre"]) || !empty($_POST["email"]) || !empty($_POST["telefono"])){//abre el segundo if
+    if(!empty($_POST["nombre"]) || !empty($_POST["email"]) || !empty($_POST["telefono"])) /*empty= si la variable está vacía*/{//abre el segundo if
         echo "<br><strong>Metodo post enviado</strong><br>";
         //Asignar las variables (del formulario)
         $nombre= limpiar_dato($_POST["nombre"]);
@@ -80,13 +80,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             }else{
                 $direccion = NULL;
             }
-            
+
             if(isset($_POST["ciudad"])){
                 $ciudad =limpiar_dato($_POST["ciudad"]);
             }else{
                 $ciudad = NULL;
             }
-            
+
             if(isset($_POST["provincia"])){
                 $provincia =limpiar_dato($_POST["provincia"]);
             }else{
@@ -104,26 +104,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             }else{
                 $check = NULL;
             }
-        
+
             if(isset($_POST["noticia"])){
                 $noticia =limpiar_dato($_POST["noticia"]);
             }else{
                 $noticia = NULL;
             }
-        
+
             if(isset($_POST["otrostemas"])){
                 $otrostemas =limpiar_dato($_POST["otrostemas"]);
             }else{
                 $otrostemas = NULL;
             }
-        
-            $direccion= limpiar_dato($_POST["direccion"]);
-            $ciudad= limpiar_dato($_POST["ciudad"]);
-            $provincia= limpiar_dato($_POST["provincia"]);
-            $zip= limpiar_dato($_POST["zip"]);
-            $check= limpiar_dato($_POST["check"]);
-            $noticia= limpiar_dato($_POST["noticia"]);
-            $otrostemas= limpiar_dato($_POST["otrostemas"]);
+
+            echo "<strong>Nombre: </strong>" . $nombre . "<br>"; 
+            echo "<strong>Email: </strong>" . $email . "<br>";
+            echo "<strong>Teléfono: </strong>" . $telefono . "<br>";
+            echo "<strong>Dirección: </strong>" . $direccion . "<br>";
+            echo "<strong>Ciudad: </strong>" . $ciudad . "<br>";
+            echo "<strong>Provincia: </strong>" . $provincia . "<br>";
+            echo "<strong>Código Postal: </strong>" . $zip . "<br>";
+            echo "<strong>check: </strong>" . $check . "<br>";
+            echo "<strong>Noticias: </strong>" . $noticia . "<br>";
+            echo "<strong>Otros temas: </strong>" . $otrostemas . "<br>";
+
 
         }else{                          /*cerrar el if de validar */
             if ($nombre_err == true){
