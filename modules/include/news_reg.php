@@ -67,14 +67,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
         }
         
         if(validar_telefono($telefono)){
-            echo"<br>El teléfono está validado<br>";
+            echo"<br>El teléfono está validado<br><br>";
         }else{
             $telefono_err = true;   //si el teléfono es erróneo, lo pasa a verdadero
         }
 
         if( validar_nombre($nombre) && validar_email($email) && validar_telefono($telefono)){//abrir el if de validar 
 
-            /*Usamos los ISSET para quitar los warning */
+            /*Usamos los ISSET para comprobar que las variables llegan correctamente*/
             if(isset($_POST["direccion"])){
                 $direccion =limpiar_dato($_POST["direccion"]);
             }else{
@@ -99,24 +99,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
                 $zip = NULL;
             }
 
-            if(isset($_POST["check"])){
+            /* if(isset($_POST["check"])){
                 $check =limpiar_dato($_POST["check"]);
             }else{
                 $check = NULL;
-            }
+            } */
 
             if(isset($_POST["noticia"])){
                 $noticia =limpiar_dato($_POST["noticia"]);
             }else{
                 $noticia = NULL;
             }
-
+            
             if(isset($_POST["otrostemas"])){
                 $otrostemas =limpiar_dato($_POST["otrostemas"]);
             }else{
                 $otrostemas = NULL;
             }
-
+                //------------------------------------BORRAR------------------------------------------
             echo "<strong>Nombre: </strong>" . $nombre . "<br>"; 
             echo "<strong>Email: </strong>" . $email . "<br>";
             echo "<strong>Teléfono: </strong>" . $telefono . "<br>";
@@ -124,9 +124,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             echo "<strong>Ciudad: </strong>" . $ciudad . "<br>";
             echo "<strong>Provincia: </strong>" . $provincia . "<br>";
             echo "<strong>Código Postal: </strong>" . $zip . "<br>";
-            echo "<strong>check: </strong>" . $check . "<br>";
+            echo "<strong>Check: </strong>" . $check . "<br>";
             echo "<strong>Noticias: </strong>" . $noticia . "<br>";
             echo "<strong>Otros temas: </strong>" . $otrostemas . "<br>";
+                //------------------------------------BORRAR------------------------------------------
 
 
         }else{                          /*cerrar el if de validar */
@@ -147,6 +148,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
 }else{         /*Cierra el primer if */
     echo "No hemos recibido método post";
 }
+
+/* Si (llega datos) Entonces 
+    tratamos datos
+        Si si hay información Entonces
+            Si no llegan variables?**
+            limpiar la información. check!!
+            validar la informacinon.                 
+            Si datos necesarios Entonces
+                asegurar de que están bien escrito.                 
+                SiNo             
+                    mandamos dato tal cual.                 
+            Fin Si                 
+            Mostrar que todos los datos son correctos para enviar a BBDD.
+                SiNo             
+                enviar datos necesarios         
+        Fin Si 
+            SiNo     
+                avisar no han llegado. Fin Si */
+
+
+
+
+
+
+
 
 
 ?>   
