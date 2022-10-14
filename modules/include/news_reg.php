@@ -104,11 +104,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             }else{
                 $check = NULL;
             } */
+            $check= filter_input(
+                INPUT_POST,
+                "check",
+                FILTER_SANITIZE_SPECIAL_CHARS,
+                FILTER_REQUIRE_ARRAY
+            );
+            var_dump($check);
+            echo "<br>La longitud del check es: " . count($check) . ". <br>";
 
+            //== Usa un array y muestra sus valores separados por coma (o lo que se ponga entre las comillas)
+            $string=implode(", ", $check);
+            echo $string. "<br>";
+            //Deja de mostrar el valor de la aray
+
+            //el isset sirve para comprobar que llega
             if(isset($_POST["noticia"])){
                 $noticia =limpiar_dato($_POST["noticia"]);
+                if($noticia=="HMTL"){
+                    $noticia=1; //valor de html en los radios.
+                } else{
+                    $noticia=0; //valor de Texto plano en los radios.
+                }
+
             }else{
-                $noticia = NULL;
+                $noticia = 1;
             }
             
             if(isset($_POST["otrostemas"])){
@@ -124,7 +144,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             echo "<strong>Ciudad: </strong>" . $ciudad . "<br>";
             echo "<strong>Provincia: </strong>" . $provincia . "<br>";
             echo "<strong>Código Postal: </strong>" . $zip . "<br>";
-            echo "<strong>Check: </strong>" . $check . "<br>";
+            //echo "<strong>Check: </strong>" . $check . "<br>";
             echo "<strong>Noticias: </strong>" . $noticia . "<br>";
             echo "<strong>Otros temas: </strong>" . $otrostemas . "<br>";
                 //------------------------------------BORRAR------------------------------------------
@@ -166,13 +186,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
         Fin Si 
             SiNo     
                 avisar no han llegado. Fin Si */
-
-
-
-
-
-
-
 
 
 ?>   
