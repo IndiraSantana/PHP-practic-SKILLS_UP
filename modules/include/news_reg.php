@@ -3,7 +3,7 @@ require "../require/config.php"; //Conexión con el fichero config.
 //Definir las variables, El name que le tengo en el formulario (index.html)
 $nombre = $email = $telefono = $direccion = $ciudad = $provincia = $zip = $check = $noticia = $otrostemas ="";
 $nombre_err = $email_err = $telefono_err = false;
-    
+$checkeado;    
     //con esta función limpiaremos los datos antes de validarlos y enviarlos
 function limpiar_dato($dato){
     $dato = trim($dato); //trim sirve para eliminar espacios en blancos del inicio y del final
@@ -112,7 +112,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             );
             var_dump($check);
             echo "<br>La longitud del check es: " . count($check) . ". <br>";
+            $lengArray = count($check); //count devuelve todos los elementos de la array
 
+            switch ($lengArray){
+                case 1:
+                    if ($check[0] == "HTML"){
+                        $checkeado = 100;    
+                    } elseif($check[0] == "CSS"){
+                        $checkeado = 010;
+                    } else {
+                        $checkeado = 001;
+                    }
+                    break;
+
+                case 2:
+                    if($check[0] != "HTML"){
+                        $checkeado = 011;
+                        } elseif ($check[0] != "CSS"){
+                        $checkeado = 101;
+                        } else{
+                        $checkeado = 110;
+                        }
+                    break;
+
+                    case 3:
+                        $checkeado = 110;
+                        break;
+                default:
+                    $checkeado =100;
+            }
+
+            echo "Valor a devolver " . $checkeado . "<br>";
             //== Usa un array y muestra sus valores separados por coma (o lo que se ponga entre las comillas)
             $string=implode(", ", $check);
             echo $string. "<br>";
@@ -148,11 +178,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             echo "<strong>Noticias: </strong>" . $noticia . "<br>";
             echo "<strong>Otros temas: </strong>" . $otrostemas . "<br>";
                 //------------------------------------BORRAR------------------------------------------
-
-
+            //Comprobar que no existen los datos que se van a enviar: los 3 datos requeridos.
+            SELECT fullname, email, phone from news_reg WHERE $nombre="fullname" $email="email" $telefono="phone"
+            //Si devuelve algo, que 
+            //INSERT datos a la BBDD
+            INSERT INTO fullname, email, phone, addres, city, state, zipcode, newsletters, format_news,suggestion VALUES($nombre, $email, $telefono, $direccion, $ciudad = $provincia, $zip, ,$check, $noticia, $otrostemas)
+            
         }else{                          /*cerrar el if de validar */
             if ($nombre_err == true){
-                echo "la validación del nombre está errónea";
+                echo "la validación del nombre está errónea";,
             }elseif($email_err == true){
                 echo "La validación del email está errónea";
             }elseif($telefono_err == true);
