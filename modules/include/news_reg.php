@@ -112,35 +112,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             );
             var_dump($check);
             echo "<br>La longitud del check es: " . count($check) . ". <br>";
+            
             $lengArray = count($check); //count devuelve todos los elementos de la array
 
             switch ($lengArray){
                 case 1:
                     if ($check[0] == "HTML"){
-                        $checkeado = 100;    
+                        $checkeado = bindec ("100");    
                     } elseif($check[0] == "CSS"){
-                        $checkeado = 010;
+                        $checkeado = bindec ("010");
                     } else {
-                        $checkeado = 001;
+                        $checkeado = bindec ("001");
                     }
                     break;
 
                 case 2:
                     if($check[0] != "HTML"){
-                        $checkeado = 011;
+                        $checkeado = bindec ("011"); /*Devuelve el decimal del binario */
                         } elseif ($check[0] != "CSS"){
-                        $checkeado = 101;
+                        $checkeado = bindec ("101");
                         } else{
-                        $checkeado = 110;
+                        $checkeado = bindec ("110");
                         }
                     break;
 
                     case 3:
-                        $checkeado = 110;
+                        $checkeado = bindec ("110");
                         break;
                 default:
-                    $checkeado =100;
+                    $checkeado = bindec ("100");
             }
+            
 
             echo "Valor a devolver " . $checkeado . "<br>";
             //== Usa un array y muestra sus valores separados por coma (o lo que se ponga entre las comillas)
@@ -179,14 +181,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
             echo "<strong>Otros temas: </strong>" . $otrostemas . "<br>";
                 //------------------------------------BORRAR------------------------------------------
             //Comprobar que no existen los datos que se van a enviar: los 3 datos requeridos.
-            SELECT fullname, email, phone from news_reg WHERE $nombre="fullname" $email="email" $telefono="phone"
-            //Si devuelve algo, que 
-            //INSERT datos a la BBDD
-            INSERT INTO fullname, email, phone, addres, city, state, zipcode, newsletters, format_news,suggestion VALUES($nombre, $email, $telefono, $direccion, $ciudad = $provincia, $zip, ,$check, $noticia, $otrostemas)
-            
-        }else{                          /*cerrar el if de validar */
+            try {
+                $sql= "SELECT * from news_reg  WHERE fullname = :fullname OR email= :email OR phone = :phone";
+                
+                $stmt =$conn-> prepare ($sql);
+
+                $stmt->bindParam(":fullname", $nombre, PDO:: PARAM_STR);
+                $stmt->bindParam(":email", $email, PDO:: PARAM_STR);
+                $stmt->bindParam(":phone", $telefono, PDO:: PARAM_STR);
+
+                $stmt-> execute();
+                $resultado = $stmt-> fetchAll();
+                echo "El resultado es " .var_dump($resultado) . "<br>";
+                if($resultado){
+                    echo "<br>La información ya existe. <br>";
+                    } else{
+                        try {
+                            $sql ="INSERT INTO news_reg (fullname, email, phone, address, city, state, zipcode, newsletters, format_news, suggestion) VALUES (:fullname, :email, :phone, :address, :city, :state, :zipcode, :newsletters, :format_news, :suggestion)";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bindParam(":fullname", $nombre, PDO:: PARAM_STR);
+                            $stmt->bindParam(":email", $email, PDO:: PARAM_STR);
+                            $stmt->bindParam(":phone", $telefono, PDO:: PARAM_STR);
+                            $stmt->bindParam(":address", $direccion, PDO:: PARAM_STR);
+                            $stmt->bindParam(":city", $ciudad, PDO:: PARAM_STR);
+                            $stmt->bindParam(":state", $provincia, PDO:: PARAM_STR);
+                            $stmt->bindParam(":zipcode", $zip, PDO:: PARAM_STR);
+                            $stmt->bindParam(":newsletters", $checkeado, PDO:: PARAM_STR);
+                            $stmt->bindParam(":format_news", $noticia, PDO:: PARAM_STR);
+                            $stmt->bindParam(":suggestion", $otrostemas, PDO:: PARAM_STR);
+
+                            $stmt-> execute();
+                            echo "Nuevo registro creado con éxito <br>";   
+                        } catch(PDOException $e){
+                            echo $sql . "<br>" . $e->getMessage();
+                        }
+                        $conn = null;
+                    }
+            } catch(PDOException $e){
+                echo $sql . "<br>" . $e->getMessage();
+            }
+
+        } else {                          /*cerrar el if de validar */
             if ($nombre_err == true){
-                echo "la validación del nombre está errónea";,
+                echo "la validación del nombre está errónea";
             }elseif($email_err == true){
                 echo "La validación del email está errónea";
             }elseif($telefono_err == true);
@@ -199,8 +236,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
     }
     
 
-}else{         /*Cierra el primer if */
-    echo "No hemos recibido método post";
+} else {         /*Cierra el primer if */
+    echo "No se ha recibido el método post";
 }
 
 /* Si (llega datos) Entonces 
@@ -222,4 +259,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){ //abre el primer if
                 avisar no han llegado. Fin Si */
 
 
-?>   
+?> 
