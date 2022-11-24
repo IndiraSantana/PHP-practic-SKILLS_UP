@@ -1,5 +1,5 @@
 <?php
-    require "../modules/require/config.php";
+    require "../modules/require/config.php"; /* Para conectar a la BBDD */
     htmlspecialchars($_SERVER['PHP_SELF']);
     $_SERVER['REQUEST_METHOD'] == null;
 ?>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="./css/normalize.css">
     <link rel="stylesheet" type="text/css" href="./css/tablaobra.css">
     <title>Usuarios inscritos</title>
-    <!-- <link rel="icon" type="image/png" hrfe="./images/pfae.png" size="64x64"> -->
+    <link rel="icon" type="image/png" hrfe="./images/pfae.png" alt="Logo del pfae" size="32x32"> <!-- Logo del pfae  -->
 </head>
 
 <body>
@@ -24,8 +24,7 @@
                 <button type="submit" name="MostrarInscritos">MOSTRAR DATOS</button>
             </form>
         <?php else :?>
-            <?php /* Redenrerizar la tabla */
-                //require_DIR_ . '/inc/post.php';
+            <?php /* Renderización de  la tabla */
                 $sql = "SELECT * FROM news_reg";
                 $stmt = $conn-> prepare($sql);
                 $stmt -> execute();
@@ -47,8 +46,9 @@
                                     </tr>
                                 </thead>";
                     foreach (($rows = $stmt ->fetchAll()) as $row){
+                        /* Las siguientes variables son las de la BBDD (no son las del formulario que he creado) Para así, poder llamarla desde la bbdd */
                         echo "<tr>
-                                <td>".$row["fullname"]."</td>
+                                <td>".$row["fullname"]."</td> 
                                 <td>".$row["phone"]."</td>
                                 <td>".$row["email"]."</td>
                                 <td>".$row["address"]."</td>
@@ -66,7 +66,7 @@
                     echo "<p> 0 resultados, no se han encontrado datos.</p><br>";
                 }
                 $conn = null;
-            ?> <!-- Se termina de redenrerizar la tabla -->
+            ?> <!-- Se termina la renderización de la tabla -->
             <?php endif ?>
     </main>
 </body>
